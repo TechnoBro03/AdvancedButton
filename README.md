@@ -22,6 +22,6 @@ Functions
 * getMultiPress()
 * update()
 
-Available Examples
+Examples
 ----------------------------
 * [01.BasicUsage](https://github.com/TechnoBro03/AdvancedButton/tree/main/examples/01.BasicUsage)
