@@ -25,9 +25,3 @@ Functions
 Available Examples
 ----------------------------
 * [01.BasicUsage](https://github.com/TechnoBro03/AdvancedButton/tree/main/examples/01.BasicUsage)
-* [02.SingleButtonEvents](https://arduinogetstarted.com/library/button/example/arduino-single-button-events)
-* [03.SingleButtonDebounce](https://arduinogetstarted.com/library/button/example/arduino-single-button-debounce)
-* [04.SingleButtonAll](https://arduinogetstarted.com/library/button/example/arduino-single-button-all)
-* [05.MultipleButtonAll](https://arduinogetstarted.com/library/button/example/arduino-multiple-button-all)
-* [06.ButtonCount](https://arduinogetstarted.com/library/button/example/arduino-button-count)
-* [07.ButtonArray](https://arduinogetstarted.com/library/button/example/arduino-button-array)
