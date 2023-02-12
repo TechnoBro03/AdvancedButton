@@ -24,7 +24,7 @@ Functions
 
 Available Examples
 ----------------------------
-* [01.SingleButton](https://arduinogetstarted.com/library/button/example/arduino-single-button)
+* [01.BasicUsage](https://github.com/TechnoBro03/AdvancedButton/tree/main/examples/01.BasicUsage)
 * [02.SingleButtonEvents](https://arduinogetstarted.com/library/button/example/arduino-single-button-events)
 * [03.SingleButtonDebounce](https://arduinogetstarted.com/library/button/example/arduino-single-button-debounce)
 * [04.SingleButtonAll](https://arduinogetstarted.com/library/button/example/arduino-single-button-all)
