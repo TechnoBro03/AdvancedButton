@@ -1,5 +1,5 @@
 # AdvancedButton Library for Arduino
-A library designed to add simple, easy, and advanced functionality to any switch.
+A library designed to add simple yet advanced functionality to any switch.
 
 Features
 ----------------------------
@@ -17,14 +17,17 @@ Functions
 * getState()
 * getDebounceState()
 * getCount()
+* getNumPresses()
 * getLongPress()
-* getLengthPressed()
-* getMultiPress()
+* getLengthPreszsed()
 * update()
 
 Examples
 ----------------------------
 * [01.BasicUsage](https://github.com/TechnoBro03/AdvancedButton/tree/main/examples/01.BasicUsage)
+* [02.MultiplePresses](https://github.com/TechnoBro03/AdvancedButton/tree/main/examples/02.MultiplePresses)
+* [03.LongPressAndHold](https://github.com/TechnoBro03/AdvancedButton/tree/main/examples/03.LongPressAndHold)
+* [04.PracticalApplications](https://github.com/TechnoBro03/AdvancedButton/tree/main/examples/04.PracticalApplications)
 
 Installation
 ----------------------------
