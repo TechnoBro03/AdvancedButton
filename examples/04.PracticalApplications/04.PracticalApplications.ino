@@ -3,7 +3,7 @@
 ///
 /// This example shows a more advanced usage of the button.
 /// 
-/// Detect different patterns on presses
+/// Detect different patterns of presses
 ///
 
 #include <AdvancedButton.h>
