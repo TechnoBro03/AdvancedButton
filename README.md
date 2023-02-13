@@ -10,7 +10,8 @@ A library designed to add advanced yet intuitive functionality to any kind of sw
 * Internal pull-up resistor to eliminate floating voltage
 * Counting, long press, touch & hold, and multi-press
 
-## [Documentation](https://github.com/TechnoBro03/AdvancedButton/tree/main/src/AdvancedButton.h)
+## Documentation
+* [AdvancedButton.h](https://github.com/TechnoBro03/AdvancedButton/tree/main/src/AdvancedButton.h)
 
 ## Examples
 * [01.BasicUsage](https://github.com/TechnoBro03/AdvancedButton/tree/main/examples/01.BasicUsage)
