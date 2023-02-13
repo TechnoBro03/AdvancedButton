@@ -25,4 +25,4 @@ A library designed to add advanced yet intuitive functionality to any kind of sw
 * Start the Arduino IDE, go to "Sketch" -> "Include Library" -> "Add .ZIP Library"
 * Select the ZIP file.
 * Restart the Arduino IDE.
-* AdvancedButton should now appear in the library drop-down menu.
+* AdvancedButton should now appear in the Library and Examples drop-down menus.
