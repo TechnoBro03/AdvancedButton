@@ -9,6 +9,7 @@ A library designed to add advanced yet intuitive functionality to any kind of sw
 * Debounce to eliminate ripple signal
 * Internal pull-up resistor to eliminate floating voltage
 * Counting, long press, touch & hold, and multi-press
+* Momentary and Latching switch friendly
 
 ## Documentation
 * [AdvancedButton.h](https://github.com/TechnoBro03/AdvancedButton/tree/main/src/AdvancedButton.h)
