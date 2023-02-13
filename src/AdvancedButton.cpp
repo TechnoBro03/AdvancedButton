@@ -108,6 +108,7 @@ void AdvancedButton::update()
     /// If button is RISING.
     if(currentDebounceState == true && previousDebounceState == false)
     {
+        timePressed = currentTime;
         if(signalMode == RISING || signalMode == CHANGE)
         {
           signal();
