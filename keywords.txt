@@ -15,7 +15,7 @@ AdvancedButton	KEYWORD1
 getState          KEYWORD2
 getDebounceState	KEYWORD2
 getCount	        KEYWORD2
-getMultiPress	    KEYWORD2
+getNumPresses	    KEYWORD2
 getLengthPressed	KEYWORD2
 getLongPress	    KEYWORD2
 update	          KEYWORD2
