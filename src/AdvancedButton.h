@@ -22,7 +22,7 @@ class AdvancedButton {
         unsigned long debounceDelay;
         unsigned long pressDelay;
         ///
-        /// User Accessable Variables
+        /// User Accessible Variables
         ///
         unsigned int count;
         unsigned int numPresses;
