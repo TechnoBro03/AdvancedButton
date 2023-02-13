@@ -9,13 +9,14 @@ unsigned int numPresses = 0u;
 unsigned long timePressed = 0ul;
 unsigned long timeReleased = 0ul;
 unsigned long lengthPressed = 0ul;
-AdvancedButton::AdvancedButton(int pin, int countMode, bool defaultState, bool internalPullup, unsigned long debounceDelay, unsigned long pressDelay)
+unsigned long timeSingaled = 0ul;
+AdvancedButton::AdvancedButton(int pin, int signalMode, bool defaultState, bool internalPullup, unsigned long debounceDelay, unsigned long signalDelay)
 {
     this->pin = pin;
     this->defaultState = internalPullup ? HIGH : defaultState;
-    this->countMode = countMode;
+    this->signalMode = signalMode;
     this->debounceDelay = debounceDelay;
-    this->pressDelay = pressDelay;
+    this->signalDelay = signalDelay;
     pinMode(pin, internalPullup ? INPUT_PULLUP : INPUT);
 
     currentState = getState();
@@ -39,7 +40,7 @@ unsigned int AdvancedButton::getCount(bool resetCount)
 unsigned int AdvancedButton::getNumPresses(bool resetNumPresses)
 {
   /// Wait to make sure all presses are finished.
-  if(currentTime - timePressed > pressDelay)
+  if(currentTime - timeSignaled > signalDelay)
   {
     unsigned int value = numPresses;
     if(resetNumPresses) {numPresses = 0;}
@@ -67,7 +68,23 @@ bool AdvancedButton::getLongPress(unsigned long min, unsigned long max, bool pre
     }
   }
     return false;
-  }
+}
+
+void AdvancedButton::signal()
+{
+  count++;
+
+  if(currentTime - timeSignaled < signalDelay)
+        {
+          numPresses++;
+        }
+        else
+        {
+          numPresses = 1;
+        }
+        timeSignaled = currentTime;
+        lengthPressed = 0;
+}
 
 void AdvancedButton::update()
 {
@@ -91,21 +108,10 @@ void AdvancedButton::update()
     /// If button is RISING.
     if(currentDebounceState == true && previousDebounceState == false)
     {
-        if(countMode == RISING || countMode == CHANGE)
+        if(signalMode == RISING || signalMode == CHANGE)
         {
-          count++;
+          signal();
         }
-
-        if(currentTime - timePressed < pressDelay)
-        {
-          numPresses++;
-        }
-        else
-        {
-          numPresses = 1;
-        }
-        timePressed = currentTime;
-        lengthPressed = 0;
     }
 
     /// If button is FALLING.
@@ -114,9 +120,9 @@ void AdvancedButton::update()
         timeReleased = currentTime;
         lengthPressed = timeReleased - timePressed;
 
-        if(countMode == FALLING || countMode == CHANGE)
+        if(signalMode == FALLING || signalMode == CHANGE)
         {
-          count++;
+          signal();
         }
     }
 }
