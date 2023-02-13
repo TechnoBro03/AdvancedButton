@@ -24,7 +24,7 @@ void loop()
   button.update();
 
   /// Store number of consecutive presses.
-  unsigned int t = button.getNumPresses();
+  unsigned int t = button.getNumPresses(true);
 
   if(t == 1)
   {
