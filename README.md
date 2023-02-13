@@ -21,6 +21,6 @@ A library designed to add advanced yet intuitive functionality to any kind of sw
 
 ## Installation
 * Click "<> Code" -> "Download ZIP"
-* Start the Arduino IDE, go to Sketch -> Include Library.
+* Start the Arduino IDE, go to "Sketch" -> "Include Library"
 * Select the ZIP file.
 * Verify that the library you just added is available in the list.
