@@ -1,19 +1,22 @@
-#include "Arduino.h"
-#include "AdvancedButton.h"
+///
+/// This code is written and maintained by TechnoBro03.
+///
+
+#include <Arduino.h>
+#include <AdvancedButton.h>
 
 unsigned int numPresses = 0u;
-unsigned long lastTimeCountChanged = 0ul;
 unsigned long timePressed = 0ul;
 unsigned long timeReleased = 0ul;
 unsigned long lengthPressed = 0ul;
-AdvancedButton::AdvancedButton(int pin, bool defaultState = HIGH, bool pullup = true, int countMode = RISING, unsigned long debounceTime = 10ul, unsigned long toggleDelay = 50ul)
+AdvancedButton::AdvancedButton(int pin, int countMode, bool defaultState, bool internalPullup, unsigned long debounceDelay, unsigned long pressDelay)
 {
     this->pin = pin;
-    this->defaultState = pullup ? HIGH : defaultState;
+    this->defaultState = internalPullup ? HIGH : defaultState;
     this->countMode = countMode;
-    this->debounceTime = debounceTime;
-    this->toggleDelay = toggleDelay;
-    pinMode(pin, pullup ? INPUT_PULLUP : INPUT);
+    this->debounceDelay = debounceDelay;
+    this->pressDelay = pressDelay;
+    pinMode(pin, internalPullup ? INPUT_PULLUP : INPUT);
 
     currentState = getState();
     previousState = currentState;
@@ -23,57 +26,43 @@ AdvancedButton::AdvancedButton(int pin, bool defaultState = HIGH, bool pullup = 
     lastTimeStateChanged = millis();
 }
 
-void AdvancedButton::press()
-{
-  count++;
-
-  if(currentTime - lastTimeCountChanged < toggleDelay)
-  {
-    numPresses++;
-  }
-  else
-  {
-    numPresses = 1;
-  }
-  lastTimeCountChanged = currentTime;
-}
-
 bool AdvancedButton::getState() { return defaultState ? !digitalRead(pin) : digitalRead(pin); }
 bool AdvancedButton::getDebounceState() { return currentDebounceState; }
 
-unsigned int AdvancedButton::getCount(bool resetCount = false)
+unsigned int AdvancedButton::getCount(bool resetCount)
 {
   unsigned int value = count;
   if(resetCount) {count = 0;}
   return value;
 }
 
-unsigned int AdvancedButton::getMultiPress()
+unsigned int AdvancedButton::getNumPresses(bool resetNumPresses)
 {
-  if(currentTime - lastTimeCountChanged > toggleDelay)
+  /// Wait to make sure all presses are finished.
+  if(currentTime - timePressed > pressDelay)
   {
-    return numPresses;
+    unsigned int value = numPresses;
+    if(resetNumPresses) {numPresses = 0;}
+    return value;
   }
-  else
-  {
-    return 0;
-  }
+  return 0;
 }
 
-unsigned long AdvancedButton::getLengthPressed(bool resetLengthPressed = true)
+unsigned long AdvancedButton::getLengthPressed(bool resetLengthPressed)
 {
     unsigned int value = currentDebounceState ? (currentTime - timePressed) : lengthPressed;
     if(resetLengthPressed) {lengthPressed = 0;}
     return value;
 }
 
-bool AdvancedButton::getLongPress(unsigned long min, unsigned long max, bool hold = false)
+bool AdvancedButton::getLongPress(unsigned long min, unsigned long max, bool pressed, bool resetLongPress)
 {
-  if(!(getDebounceState()^hold))
+  if(!(getDebounceState()^pressed))
   {
-    unsigned long l = getLengthPressed(false);
-    if(l > min && l < max)
+    unsigned long l = getLengthPressed();
+    if(min < l && l <= max)
     {
+      getLengthPressed(resetLongPress);
       return true;
     }
   }
@@ -85,29 +74,41 @@ void AdvancedButton::update()
     currentState = getState();
     currentTime = millis();
 
+    /// Check state change.
     if(currentState != previousState)
     {
         previousState = currentState;
         lastTimeStateChanged = currentTime;
     }
 
-    if(debounceTime < (currentTime - lastTimeStateChanged))
+    /// Change debounce state.
+    if(debounceDelay < (currentTime - lastTimeStateChanged))
     {
         previousDebounceState = currentDebounceState;
         currentDebounceState = currentState;
     }
 
+    /// If button is RISING.
     if(currentDebounceState == true && previousDebounceState == false)
     {
-        timePressed = currentTime;
-        lengthPressed = 0;
-
         if(countMode == RISING || countMode == CHANGE)
         {
-          press();
+          count++;
         }
+
+        if(currentTime - timePressed < pressDelay)
+        {
+          numPresses++;
+        }
+        else
+        {
+          numPresses = 1;
+        }
+        timePressed = currentTime;
+        lengthPressed = 0;
     }
 
+    /// If button is FALLING.
     if(currentDebounceState == false && previousDebounceState == true)
     {
         timeReleased = currentTime;
@@ -115,7 +116,7 @@ void AdvancedButton::update()
 
         if(countMode == FALLING || countMode == CHANGE)
         {
-          press();
+          count++;
         }
     }
 }
