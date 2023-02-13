@@ -18,9 +18,9 @@ class AdvancedButton {
         ///
         int pin;
         bool defaultState;
-        int countMode;
+        int signalMode;
         unsigned long debounceDelay;
-        unsigned long pressDelay;
+        unsigned long signalDelay;
         ///
         /// User Accessible Variables
         ///
@@ -38,6 +38,8 @@ class AdvancedButton {
         unsigned long currentTime;
         unsigned long timePressed;
         unsigned long timeReleased;
+        unsigned long timeSignaled;
+        void signal();
 
     public:
 
@@ -47,11 +49,11 @@ class AdvancedButton {
         /// \param pin Arduino pin connected to button.
         /// \param defaultState Logic level of button when not pressed (HIGH or LOW).
         /// \param pullup Usage of internal pull-up resistor.
-        /// \param countMode When the button is "toggled." Button state (pressed or unpressed), NOT logic level. (FALLING, RISING, CHANGE).
+        /// \param signalMode When to increment count and numPresses. Change in Button state (pressed or unpressed), NOT logic level. (FALLING, RISING, CHANGE).
         /// \param debounceDelay Time delay to remove ripple signal.
-        /// \param pressDelay Time allowed between consecutive presses.
+        /// \param signalDelay Time allowed between consecutive signals.
         ///
-        AdvancedButton(int pin, int countMode = RISING, bool defaultState = HIGH, bool internalPullup = true, unsigned long debounceDelay = 10ul, unsigned long pressDelay = 250ul);
+        AdvancedButton(int pin, int signalMode = RISING, bool defaultState = HIGH, bool internalPullup = true, unsigned long debounceDelay = 10ul, unsigned long signalDelay = 250ul);
 
         ///
         /// Returns current state of button.
@@ -77,14 +79,14 @@ class AdvancedButton {
         unsigned int getCount(bool resetCount = false);
 
         ///
-        /// Returns number of consecutive presses.
+        /// Returns number of consecutive singals (signalMode).
         ///
-        /// A consecutive press is any time a press occurs within 'pressDelay'ms of the previous.
+        /// A consecutive signal is any time a signal occurs within 'signalDelay'ms of the previous.
         ///
         /// \param resetNumPresses If true, and a value other than 0 is returned, numPresses is set to 0.
         ///
-        /// \return Number of presses. 0 is returned if the button is still being pressed repeatadly
-        ///     ('pressDelay'ms need to pass without a press)
+        /// \return Number of presses. 0 is returned if the button is still being pressed repeatedly
+        ///     ('signalDelay'ms need to pass without a press)
         ///
         unsigned int getNumPresses(bool resetNumPresses = false);
 
