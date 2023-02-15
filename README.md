@@ -1,5 +1,5 @@
 # AdvancedButton Library for Arduino
-### Advanced Functionality with the Simple Touch of a Button.
+### Advanced Functionality with a Simple Touch.
 A library designed to add advanced yet intuitive functionality to any kind of switch.
 
 ## Features
