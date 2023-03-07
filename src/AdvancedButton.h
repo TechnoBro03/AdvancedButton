@@ -70,7 +70,7 @@ class AdvancedButton {
         bool getDebounceState();
 
         ///
-        /// Returns total number of times button has been toggled.
+        /// Returns total number of times button has been signaled.
         ///
         /// \param resetCount If true, count is set to 0.
         ///
