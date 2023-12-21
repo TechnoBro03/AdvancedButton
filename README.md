@@ -21,7 +21,7 @@ A library designed to add advanced yet intuitive functionality to any kind of sw
 * [04.PracticalApplications](https://github.com/TechnoBro03/AdvancedButton/tree/main/examples/04.PracticalApplications)
 
 ## Installation
-* Click ![Code](https://i.ibb.co/2tTwMyX/Code.png) -> ![Download Zip](https://i.ibb.co/Kxyb6mh/download.png)
+* Click "Code" -> "Download Zip"
 * Start the Arduino IDE, go to "Sketch" -> "Include Library" -> "Add .ZIP Library"
 * Select the ZIP file.
 * Restart the Arduino IDE.
