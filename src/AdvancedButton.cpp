@@ -83,7 +83,6 @@ void AdvancedButton::signal()
           numPresses = 1;
         }
         timeSignaled = currentTime;
-        lengthPressed = 0;
 }
 
 void AdvancedButton::update()
